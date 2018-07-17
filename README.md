@@ -1,1 +1,2 @@
-# appchannels.sdk
+# add sdk
+# support tencent ysdk

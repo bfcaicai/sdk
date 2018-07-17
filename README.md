@@ -1,2 +1,2 @@
-# add sdk
-# support tencent ysdk
+# SDK Server-side
+#### add Tencent ysdk access

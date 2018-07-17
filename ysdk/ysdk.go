@@ -2,18 +2,16 @@ package ysdk
 
 import (
 	"crypto/hmac"
-	"crypto/md5"
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
 	"github.com/astaxie/beego/httplib"
-	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"sdk/utils"
 	"sort"
 	"strconv"
 	"strings"
@@ -272,7 +270,7 @@ func ValidateAccessToken(ntype int, openid, token, usrip string) bool {
 		appid, appkey, api = wechat_appid, wechat_appkey, WX_check_api
 	}
 	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-	sig := md5String(appkey + timestamp)
+	sig := utils.Md5String(appkey + timestamp)
 	log.Println("query sig:", sig)
 	url_param := "?timestamp=" + timestamp + "&appid=" + appid +
 		"&sig=" + sig + "&openid=" + openid + "&openkey=" + token + "&userip=" + usrip
@@ -353,10 +351,4 @@ func setcookies(ntype int, apistr string) []*http.Cookie {
 		Value: url.QueryEscape(keng_str + apistr)}
 	cookiels = append(cookiels, cookie_orgloc)
 	return cookiels
-}
-
-func md5String(md5Str string) string {
-	md5 := md5.New()
-	io.WriteString(md5, md5Str)
-	return fmt.Sprintf("%x", md5.Sum(nil))
 }

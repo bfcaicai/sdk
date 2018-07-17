@@ -1,10 +1,11 @@
 package main
 
 import (
-	_ "appchannels/ysdk"
 	"log"
+	_ "sdk/coolpad"
+	_ "sdk/ysdk"
 )
 
 func main() {
-	log.Println("set channels success")
+	log.Println("set sdk success")
 }
